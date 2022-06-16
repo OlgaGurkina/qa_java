@@ -9,12 +9,12 @@ import java.util.List;
 
 
 @RunWith(Parameterized.class)
-public class AnimalTest {
+public class AnimalGetFoodTest {
 
     private final String animalKind;
     private final List<String> expFood;
 
-    public AnimalTest(String animalKind, List<String> expFood) {
+    public AnimalGetFoodTest(String animalKind, List<String> expFood) {
         this.animalKind = animalKind;
         this.expFood = expFood;
     }
@@ -24,28 +24,15 @@ public class AnimalTest {
         return new Object[][]{
                 {"Травоядное", List.of("Трава", "Различные растения")},
                 {"Хищник", List.of("Животные", "Птицы", "Рыба")},
-                {"ErrorAnimalKind", null},
         };
     }
 
     @Test
-    public void checkGetFood()  {
+    public void checkGetFood() throws Exception {
         Animal animal = new Animal();
-        List <String> actual = null;
-        try {
-            actual = animal.getFood(animalKind);
-        } catch (Exception e) {}
+        List <String> actual = animal.getFood(animalKind);
         Assert.assertEquals(actual, expFood);
     }
 
-
-
-
-    @Test
-    public void checkGetFamily() {
-        Animal animal = new Animal();
-        String actual = animal.getFamily();
-        Assert.assertNotNull(actual);
-    }
 
 }

@@ -2,25 +2,17 @@ package com.example;
 
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 
 public class FelineTest {
 
     @Test
-    public void checkEatMeat() {
+    public void checkEatMeat() throws Exception {
         List <String> expectedFoodList = List.of("Животные", "Птицы", "Рыба");
         List <String> actual;
         Feline feline = new Feline();
-        try {
-            actual = feline.eatMeat();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        actual = feline.eatMeat();
         Assert.assertEquals(actual, expectedFoodList);
     }
 

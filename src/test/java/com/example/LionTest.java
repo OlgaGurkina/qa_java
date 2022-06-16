@@ -3,12 +3,10 @@ package com.example;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LionTest {
@@ -17,26 +15,21 @@ public class LionTest {
 
     @Test
     public void checkConstructorException() {
-        Lion lion = null;
-        Exception testException = null;
-        try {
-            lion = new Lion(feline, "IncorrectSex");
-        } catch (Exception e) {
-            testException = e;
-        }
-        Assert.assertNotNull(testException);
-        Assert.assertNull(lion);
-    }
-
-
-    @Test
-    public void checkGetKittens() {
+        String expException = "Используйте допустимые значения пола животного - самей или самка";
+        String incorrectSex = "IncorrectSex";
         Lion lion;
         try {
-            lion = new Lion(feline, "Самец");
+            lion = new Lion(feline, incorrectSex);
+            Assert.fail("Expected Exception");
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Assert.assertEquals(expException, e.getMessage());
         }
+    }
+
+    @Test
+    public void checkGetKittens() throws Exception {
+        Lion lion;
+        lion = new Lion(feline, "Самец");
         Mockito.when(feline.getKittens()).thenReturn(10);
         Assert.assertEquals(10, lion.getKittens());
     }
@@ -44,16 +37,8 @@ public class LionTest {
     @Test
     public void getFood() throws Exception {
         Lion lion;
-        try {
-            lion = new Lion(feline, "Самец");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            lion.getFood();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        lion = new Lion(feline, "Самец");
+        lion.getFood();
         Mockito.verify(feline, Mockito.times(1)).getFood("Хищник");
 
     }
