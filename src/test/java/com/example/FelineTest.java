@@ -10,9 +10,8 @@ public class FelineTest {
     @Test
     public void checkEatMeat() throws Exception {
         List <String> expectedFoodList = List.of("Животные", "Птицы", "Рыба");
-        List <String> actual;
         Feline feline = new Feline();
-        actual = feline.eatMeat();
+        List <String> actual = feline.eatMeat();
         Assert.assertEquals(actual, expectedFoodList);
     }
 
